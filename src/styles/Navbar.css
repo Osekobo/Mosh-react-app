@@ -1,0 +1,93 @@
+/* ===== Base Navbar ===== */
+.navbar {
+  background: #333;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* ===== Links (desktop) ===== */
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.nav-links a:hover {
+  opacity: 0.7;
+}
+
+/* active route highlight */
+.nav-links a.active {
+  color: #00d4ff;
+  font-weight: bold;
+}
+
+/* logout button */
+.logout-btn {
+  background: red;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+/* ===== Hamburger ===== */
+.menu-btn {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background: #333;
+    flex-direction: column;
+    width: 200px;
+
+    /* animation setup */
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+
+    padding: 1rem;
+    gap: 15px;
+  }
+
+  .nav-links.active {
+    transform: translateX(0);
+  }
+}
