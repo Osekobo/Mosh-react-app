@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("Email", email);
@@ -24,6 +26,9 @@ function LoginForm() {
         console.log("Error:", data.detail);
       } else {
         console.log("Success:", data);
+        // localStorage.setItem("token", data.access_token || "loggedin");
+        localStorage.setItem("token", data.access_token);
+        navigate("/home");
         // alert("User login successful");
       }
     } catch (err) {
