@@ -28,7 +28,7 @@ function LoginForm() {
         console.log("Success:", data);
         // localStorage.setItem("token", data.access_token || "loggedin");
         localStorage.setItem("token", data.access_token);
-        navigate("/home");
+        navigate("/dashboard");
         // alert("User login successful");
       }
     } catch (err) {

@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function RegisterForm() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault;
     const userData = {
@@ -26,7 +28,8 @@ function RegisterForm() {
         console.log("Error:", data.detail);
       } else {
         console.log("Success:", data);
-        alert("User registrstion successful");
+        navigate("/login");
+        // alert("User registrstion successful");
       }
     } catch (err) {
       console.log("Network error:", err);
