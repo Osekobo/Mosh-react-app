@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 
 function ExpenseList() {
+  const handleEdit = () => {
+    setName(expense.name);
+  };
   const [expenses, setExpenses] = useState([]);
   useEffect(() => {
     fetchExpenses(); //Runs once when the component loads.
@@ -43,6 +46,7 @@ function ExpenseList() {
           <p>Amount: ${expense.price}</p>
         </div>
       ))} */}
+      {/* This is a strong correct use case for rendering lists. */}
 
       <table>
         <thead>

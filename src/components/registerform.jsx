@@ -8,7 +8,7 @@ function RegisterForm() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
-    e.preventDefault;
+    e.preventDefault();
     const userData = {
       name,
       phone,

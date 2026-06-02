@@ -6,6 +6,7 @@ function ExpenseForm() {
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
   const [income, setIncome] = useState("");
+  const [editingId, setEditingId] = useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userdata = {
@@ -16,23 +17,51 @@ function ExpenseForm() {
       income,
     };
     try {
-      const response = await fetch("http://127.0.0.1:8000/expenseform", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userdata),
-      });
+      let response;
+      if (editingId) {
+        response = await fetch(
+          `http://127.0.0.1:8000/expenseform/${editingId}`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(userdata),
+          },
+        );
+      } else {
+        // Create (ADD MODE)
+        response = await fetch("http://127.0.0.1:8000/expenseform", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userdata),
+        });
+      }
+      // const response = await fetch("http://127.0.0.1:8000/expenseform", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(userdata),
+      // });
       const data = await response.json();
       if (!response.ok) {
         console.log("Error:", data.detail);
       } else {
         console.log("Success:", data);
+        // reset form
+        setName("");
+        setPrice("");
+        setCategory("");
+        setDate("");
+        setIncome("");
+        setEditingId("");
       }
     } catch (err) {
       console.log("Network error:", err);
     }
   };
+
   return (
     <>
       <h1>Expense form</h1>
