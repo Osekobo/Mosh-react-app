@@ -1,4 +1,5 @@
-import RegisterForm from "../components/registerform";
+import RegisterForm from "../components/RegisterForm";
+
 function Register() {
   return (
     <>

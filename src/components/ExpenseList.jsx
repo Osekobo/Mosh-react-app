@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import ExpenseItem from "./ExpenseItem";
 
-function ExpenseList() {
-  const handleEdit = () => {
-    setName(expense.name);
+function ExpenseList({ setEditingExpense }) {
+  const handleEdit = (expense) => {
+    setEditingExpense(expense);
   };
   const [expenses, setExpenses] = useState([]);
   useEffect(() => {
@@ -62,7 +63,7 @@ function ExpenseList() {
             {/* <th>Total</th> */}
           </tr>
         </thead>
-        <tbody>
+        {/* <tbody>
           {expenses.map((expense) => (
             <tr key={expense.id}>
               <td>{expense.id}</td>
@@ -79,9 +80,20 @@ function ExpenseList() {
                   Delete
                 </button>
               </td>
-              {/* <td>{expense.price}</td> */}
             </tr>
           ))}
+        </tbody> */}
+        <tbody>
+          {expenses.map((expense) => {
+            return (
+              <ExpenseItem
+                key={expense.id}
+                expense={expense}
+                onEdit={handleEdit}
+                onDelete={deleteExpense}
+              />
+            );
+          })}
         </tbody>
       </table>
       <h3>Total:{total}</h3>

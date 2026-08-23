@@ -1,11 +1,20 @@
-function ExpenseItem({ expense, onEdit }) {
+function ExpenseItem({ expense, onEdit, onDelete }) {
+  if (!expense) return null;
   return (
     <>
-      <h1>Expense Item</h1>
+      {/* <h1>Expense Item</h1> */}
       <tr>
         <td>{expense.id}</td>
+        <td>{expense.name}</td>
+        <td>{expense.price}</td>
+        <td>{expense.category}</td>
+        <td>{expense.date}</td>
+        <td>{expense.income}</td>
         <td>
           <button onClick={() => onEdit(expense)}>Edit</button>
+        </td>
+        <td>
+          <button onClick={() => onDelete(expense.id)}>Delete</button>
         </td>
       </tr>
     </>

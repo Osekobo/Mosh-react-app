@@ -1,15 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function ExpenseForm() {
+function ExpenseForm({ editingExpense, setEditingExpense }) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
   const [income, setIncome] = useState("");
+  useEffect(() => {
+    if (editingExpense) {
+      setName(editingExpense.name);
+      setPrice(editingExpense.price);
+      setCategory(editingExpense.category);
+      setDate(editingExpense.date);
+      setIncome(editingExpense.income);
+      setEditingId(editingExpense.id);
+    }
+  }, [editingExpense]);
   const [editingId, setEditingId] = useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userdata = {
+    const data = {
       name,
       price,
       category,
@@ -24,7 +34,7 @@ function ExpenseForm() {
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(userdata),
+            body: JSON.stringify(data),
           },
         );
       } else {
@@ -34,7 +44,7 @@ function ExpenseForm() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(userdata),
+          body: JSON.stringify(data),
         });
       }
       // const response = await fetch("http://127.0.0.1:8000/expenseform", {
@@ -44,18 +54,20 @@ function ExpenseForm() {
       //   },
       //   body: JSON.stringify(userdata),
       // });
-      const data = await response.json();
+      const result = await response.json();
       if (!response.ok) {
-        console.log("Error:", data.detail);
+        console.log("Error:", result.detail);
+        return;
       } else {
-        console.log("Success:", data);
+        console.log("Success:", result);
         // reset form
         setName("");
         setPrice("");
         setCategory("");
         setDate("");
         setIncome("");
-        setEditingId("");
+        setEditingId(null);
+        setEditingId(null);
       }
     } catch (err) {
       console.log("Network error:", err);
